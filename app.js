@@ -297,7 +297,11 @@ function renderCurrentQuestion() {
   const total = state.questions.length;
 
   elements.questionCounter.textContent = `Вопрос ${state.currentIndex + 1} из ${total}`;
-  elements.questionCategory.textContent = `Вопрос #${q.id || (state.currentIndex + 1)}`;
+  if (q.id && q.id !== (state.currentIndex + 1)) {
+    elements.questionCategory.textContent = `Вопрос #${state.currentIndex + 1} (Билет #${q.id})`;
+  } else {
+    elements.questionCategory.textContent = `Вопрос #${state.currentIndex + 1}`;
+  }
   elements.questionText.textContent = q.question;
 
   const progressPercent = ((state.currentIndex + 1) / total) * 100;
@@ -381,7 +385,7 @@ function renderNavGrid() {
     const btn = document.createElement('button');
     btn.className = 'nav-num-btn';
     btn.textContent = idx + 1;
-    btn.title = `Вопрос ${idx + 1}`;
+    btn.title = q.id && q.id !== (idx + 1) ? `Вопрос ${idx + 1} (Билет #${q.id})` : `Вопрос ${idx + 1}`;
     btn.addEventListener('click', () => {
       state.currentIndex = idx;
       renderCurrentQuestion();
@@ -694,6 +698,9 @@ function setupEvents() {
     state.mode = 'practice';
     elements.modeCardPractice.classList.add('selected');
     elements.modeCardExam.classList.remove('selected');
+    if (elements.shuffleQuestionsCheck) {
+      elements.shuffleQuestionsCheck.checked = false;
+    }
   });
 
   elements.modeCardExam.addEventListener('click', () => {
