@@ -573,14 +573,20 @@ function renderSearchResults(query) {
            item.options.some(opt => opt.toLowerCase().includes(qClean));
   });
 
-  const displayList = results.slice(0, 50); // Show top 50 matches
-
-  if (displayList.length === 0) {
+  if (results.length === 0) {
     elements.searchResultsList.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">Ничего не найдено по вашему запросу.</p>';
     return;
   }
 
-  displayList.forEach(item => {
+  const countBar = document.createElement('div');
+  countBar.style.padding = '0.2rem 0.25rem 0.6rem';
+  countBar.style.fontSize = '0.82rem';
+  countBar.style.fontWeight = '600';
+  countBar.style.color = 'var(--text-muted)';
+  countBar.textContent = qClean ? `Найдено вопросов: ${results.length} из ${subjectQuestions.length}` : `Все вопросы модуля (${results.length}):`;
+  elements.searchResultsList.appendChild(countBar);
+
+  results.forEach(item => {
     const card = document.createElement('div');
     card.className = 'search-item';
 
