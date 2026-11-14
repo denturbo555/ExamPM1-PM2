@@ -438,30 +438,6 @@ body { font-family: var(--font-family); background: var(--bg-gradient); color: v
 
 
 
-/* Mobile Phone Responsiveness */
-@media (max-width: 767px) {
-  .header-content { max-width: 100%; padding: 0.85rem 1rem; }
-  .main-wrapper { max-width: 100%; margin: 1rem auto; padding: 0 0.75rem; }
-  .main-card { padding: 1.5rem 1.15rem; border-radius: 20px; }
-  .hero-title { font-size: 1.45rem; }
-  .mode-cards-grid { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem; }
-  .mode-card { align-items: flex-start !important; padding: 1.15rem 1.1rem; }
-  .mode-card-body { text-align: left !important; align-items: flex-start !important; }
-  .mode-card-title { text-align: left !important; justify-content: flex-start !important; font-size: 1.02rem; }
-  .mode-card-desc { text-align: left !important; font-size: 0.82rem; }
-  .bottom-section { display: flex; flex-direction: column; gap: 1.25rem; }
-  .count-selector-row { display: flex; flex-direction: column; align-items: stretch; gap: 0.35rem; }
-  .custom-select-wrapper { width: 100%; min-width: 0; }
-  .actions-column { width: 100%; }
-  .btn-primary-gradient, .btn-secondary-outline { width: 100%; }
-  .quiz-controls-bar { flex-direction: column; }
-  .quiz-controls-right { width: 100%; justify-content: space-between; }
-  .results-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
-  .results-actions-bar { flex-direction: column; width: 100%; }
-  .modal-window { width: 95vw; max-width: 480px; }
-}
-
-
 /* Custom Dropdown Styling */
 .custom-select-wrapper { position: relative; min-width: 240px; user-select: none; }
 .custom-select-trigger {
@@ -553,4 +529,73 @@ body { font-family: var(--font-family); background: var(--bg-gradient); color: v
 :root:not([data-theme="light"]) .dropdown-item.active {
   background: #052014 !important;
   color: #34d399 !important;
+}
+
+/* Mobile Phone Responsiveness (Highest Specificity) */
+@media (max-width: 767px) {
+  .header-content { max-width: 100%; padding: 0.85rem 1rem; }
+  .main-wrapper { max-width: 100%; margin: 1rem auto; padding: 0 0.75rem; }
+  .main-card { padding: 1.5rem 1.15rem; border-radius: 20px; }
+  .hero-title { font-size: 1.45rem; }
+  .hero-subtitle { font-size: 0.88rem; margin-bottom: 1.2rem; }
+
+  .mode-cards-grid { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem; width: 100%; }
+  .mode-card { align-items: flex-start !important; padding: 1.15rem 1.1rem; width: 100%; }
+  .mode-card-body { text-align: left !important; align-items: flex-start !important; width: 100%; }
+  .mode-card-title { text-align: left !important; justify-content: flex-start !important; font-size: 1.02rem; width: 100%; }
+  .mode-card-desc { text-align: left !important; font-size: 0.82rem; width: 100%; }
+
+  /* Fix bottom section alignment */
+  .bottom-section {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+  }
+  .settings-column {
+    width: 100% !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .settings-title {
+    width: 100% !important;
+    text-align: left !important;
+  }
+  .count-selector-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+  }
+  .count-label {
+    width: 100% !important;
+    text-align: left !important;
+  }
+  .custom-select-wrapper {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .custom-select-trigger {
+    width: 100% !important;
+  }
+  .checkbox-list {
+    width: 100% !important;
+    align-items: flex-start !important;
+  }
+  .custom-checkbox-row {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  .actions-column { width: 100% !important; }
+  .btn-primary-gradient, .btn-secondary-outline { width: 100% !important; }
+
+  .quiz-controls-bar { flex-direction: column; }
+  .quiz-controls-right { width: 100%; justify-content: space-between; }
+  .results-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.65rem !important; }
+  .results-actions-bar { flex-direction: column !important; width: 100% !important; }
+  .modal-window { width: 95vw !important; max-width: 480px !important; }
 }
