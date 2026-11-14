@@ -111,18 +111,34 @@
             
             <div class="count-selector-row">
               <span class="count-label">Количество вопросов:</span>
-              <div class="custom-select-wrapper">
-                <select id="questionCountSelect" class="custom-select">
-                  <option value="all">Все вопросы (161)</option>
-                  <option value="25">25 случайных вопросов</option>
-                  <option value="50">50 случайных вопросов</option>
-                  <option value="100">100 случайных вопросов</option>
-                </select>
-                <span class="select-chevron">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </span>
+              <div class="custom-select-wrapper" id="countDropdownWrapper">
+                <button type="button" class="custom-select-trigger" id="countDropdownTrigger">
+                  <span id="selectedCountLabel">Все вопросы (161)</span>
+                  <span class="select-chevron" id="countDropdownChevron">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
+                </button>
+                <div class="custom-dropdown-menu" id="countDropdownMenu">
+                  <div class="dropdown-item active" data-value="all" id="optAll">
+                    <span class="item-text" id="optAllText">Все вопросы (161)</span>
+                    <span class="item-check">✔</span>
+                  </div>
+                  <div class="dropdown-item" data-value="25">
+                    <span class="item-text">25 случайных вопросов</span>
+                    <span class="item-check">✔</span>
+                  </div>
+                  <div class="dropdown-item" data-value="50">
+                    <span class="item-text">50 случайных вопросов</span>
+                    <span class="item-check">✔</span>
+                  </div>
+                  <div class="dropdown-item" data-value="100">
+                    <span class="item-text">100 случайных вопросов</span>
+                    <span class="item-check">✔</span>
+                  </div>
+                </div>
+                <input type="hidden" id="questionCountSelect" value="all">
               </div>
             </div>
 

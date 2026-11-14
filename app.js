@@ -39,6 +39,11 @@ const elements = {
   modeCardPractice: document.getElementById('modeCardPractice'),
   modeCardExam: document.getElementById('modeCardExam'),
   questionCountSelect: document.getElementById('questionCountSelect'),
+  countDropdownWrapper: document.getElementById('countDropdownWrapper'),
+  countDropdownTrigger: document.getElementById('countDropdownTrigger'),
+  selectedCountLabel: document.getElementById('selectedCountLabel'),
+  countDropdownMenu: document.getElementById('countDropdownMenu'),
+  optAllText: document.getElementById('optAllText'),
   shuffleQuestionsCheck: document.getElementById('shuffleQuestionsCheck'),
   shuffleOptionsCheck: document.getElementById('shuffleOptionsCheck'),
   startBtn: document.getElementById('startBtn'),
@@ -165,7 +170,9 @@ function setSubject(subj) {
     elements.heroTitle.textContent = 'Тестирование по профессиональному модулю ПМ2';
     elements.heroSubtitle.textContent = 'Компьютерная графика, 2D/3D моделирование и дизайн (Photoshop, Blender, Krita, GIMP, SketchUp, Tinkercad). В каждом вопросе только один правильный ответ.';
     elements.badgeText.textContent = '169 уникальных вопросов • Без повторений';
-    elements.questionCountSelect.options[0].text = 'Все вопросы (169)';
+    if (elements.questionCountSelect && elements.questionCountSelect.options) elements.questionCountSelect.options[0].text = 'Все вопросы (169)';
+    if (elements.optAllText) elements.optAllText.textContent = 'Все вопросы (169)';
+    if (elements.questionCountSelect && elements.questionCountSelect.value === 'all' && elements.selectedCountLabel) elements.selectedCountLabel.textContent = 'Все вопросы (169)';
   } else {
     elements.subjectBtnPm2.classList.remove('active');
     elements.subjectBtnPm1.classList.add('active');
@@ -173,7 +180,9 @@ function setSubject(subj) {
     elements.heroTitle.textContent = 'Тестирование по профессиональному модулю ПМ1';
     elements.heroSubtitle.textContent = 'Архитектура ПК, операционные системы, диагностика и сети. В каждом вопросе несколько вариантов ответа и только один правильный.';
     elements.badgeText.textContent = '161 уникальный вопрос • Без повторений';
-    elements.questionCountSelect.options[0].text = 'Все вопросы (161)';
+    if (elements.questionCountSelect && elements.questionCountSelect.options) elements.questionCountSelect.options[0].text = 'Все вопросы (161)';
+    if (elements.optAllText) elements.optAllText.textContent = 'Все вопросы (161)';
+    if (elements.questionCountSelect && elements.questionCountSelect.value === 'all' && elements.selectedCountLabel) elements.selectedCountLabel.textContent = 'Все вопросы (161)';
   }
 }
 
@@ -615,6 +624,50 @@ function renderSearchResults(query) {
   });
 }
 
+
+// --- Custom Dropdown Logic ---
+function selectCountOption(val) {
+  if (elements.questionCountSelect) {
+    elements.questionCountSelect.value = val;
+  }
+  const items = document.querySelectorAll('#countDropdownMenu .dropdown-item');
+  items.forEach(item => {
+    item.classList.toggle('active', item.getAttribute('data-value') === val);
+  });
+  if (elements.selectedCountLabel) {
+    if (val === 'all') {
+      elements.selectedCountLabel.textContent = state.subject === 'pm2' ? 'Все вопросы (169)' : 'Все вопросы (161)';
+    } else {
+      elements.selectedCountLabel.textContent = `${val} случайных вопросов`;
+    }
+  }
+  if (elements.countDropdownWrapper) {
+    elements.countDropdownWrapper.classList.remove('open');
+  }
+}
+
+function initDropdownEvents() {
+  if (!elements.countDropdownTrigger) return;
+  elements.countDropdownTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    elements.countDropdownWrapper.classList.toggle('open');
+  });
+
+  const items = document.querySelectorAll('#countDropdownMenu .dropdown-item');
+  items.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectCountOption(item.getAttribute('data-value'));
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (elements.countDropdownWrapper && !elements.countDropdownWrapper.contains(e.target)) {
+      elements.countDropdownWrapper.classList.remove('open');
+    }
+  });
+}
+
 // --- Event Listeners Setup ---
 function setupEvents() {
   // Theme toggle
@@ -763,5 +816,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedSubject = localStorage.getItem('exam_subject') || 'pm1';
   setSubject(savedSubject);
   setupEvents();
+  initDropdownEvents();
 });
 
