@@ -163,10 +163,15 @@ function showScreen(screen) {
 
 // --- Subject Switching ---
 function getCurrentSubjectQuestions() {
-  if (typeof EXAM_DATA !== 'undefined' && EXAM_DATA[state.subject]) {
-    return EXAM_DATA[state.subject];
+  const data = (typeof EXAM_DATA !== 'undefined' && EXAM_DATA) ? EXAM_DATA :
+               (typeof questionsData !== 'undefined' && questionsData) ? questionsData :
+               (typeof window !== 'undefined' && (window.EXAM_DATA || window.questionsData)) ? (window.EXAM_DATA || window.questionsData) :
+               null;
+
+  if (data && data[state.subject]) {
+    return data[state.subject];
   }
-  if (typeof EXAM_QUESTIONS !== 'undefined') {
+  if (typeof EXAM_QUESTIONS !== 'undefined' && Array.isArray(EXAM_QUESTIONS)) {
     return EXAM_QUESTIONS;
   }
   return [];
@@ -209,9 +214,31 @@ function shuffleArray(arr) {
   return copy;
 }
 
+// --- Asynchronous Fallback Loader ---
+async function ensureQuestionsLoaded() {
+  if (getCurrentSubjectQuestions().length > 0) return true;
+  try {
+    const res = await fetch('questions.json');
+    if (res.ok) {
+      const data = await res.json();
+      window.EXAM_DATA = data;
+      window.questionsData = data;
+      setSubject(state.subject);
+      return true;
+    }
+  } catch (err) {
+    // Local file protocol or network error, fallback to script tag
+  }
+  return false;
+}
+
 // --- Start Quiz ---
-function startQuiz(customQuestions = null) {
-  const subjectQuestions = getCurrentSubjectQuestions();
+async function startQuiz(customQuestions = null) {
+  let subjectQuestions = getCurrentSubjectQuestions();
+  if (!subjectQuestions || !subjectQuestions.length) {
+    await ensureQuestionsLoaded();
+    subjectQuestions = getCurrentSubjectQuestions();
+  }
   if (!subjectQuestions || !subjectQuestions.length) {
     alert('Ошибка: вопросы не загружены.');
     return;
@@ -847,11 +874,12 @@ function setupEvents() {
 }
 
 // --- Initialization ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initTheme();
   const savedSubject = localStorage.getItem('exam_subject') || 'pm1';
   setSubject(savedSubject);
   setupEvents();
   initDropdownEvents();
+  await ensureQuestionsLoaded();
 });
 
