@@ -250,7 +250,7 @@ function startQuiz(customQuestions = null) {
     elements.quizTimer.style.display = 'none';
   } else {
     elements.quizModeBadge.className = 'mode-badge mode-exam';
-    elements.quizModeBadge.textContent = '⏱️ Экзамен';
+    elements.quizModeBadge.textContent = state.questions.length === 30 ? '⏱️ Экзамен • Вариант (30 вопр.)' : '⏱️ Экзамен';
     elements.quizTimer.style.display = 'inline-flex';
     initTimer();
   }
@@ -490,6 +490,10 @@ function finishQuiz() {
     gradeMsg = 'К сожалению, порог не пройден. Потренируйтесь в режиме «Обучение» и попробуйте снова.';
   }
 
+  if (total === 30 && state.mode === 'exam') {
+    gradeMsg += ' Экзаменационный вариант (30 вопросов) завершён.';
+  }
+
   elements.gradeBadge.className = gradeClass;
   elements.gradeBadge.textContent = gradeText;
   elements.gradeMessage.textContent = gradeMsg;
@@ -641,6 +645,8 @@ function selectCountOption(val) {
   if (elements.selectedCountLabel) {
     if (val === 'all') {
       elements.selectedCountLabel.textContent = state.subject === 'pm2' ? 'Все вопросы (169)' : 'Все вопросы (161)';
+    } else if (val === '30') {
+      elements.selectedCountLabel.textContent = '30 вопросов (Вариант экзамена)';
     } else {
       elements.selectedCountLabel.textContent = `${val} случайных вопросов`;
     }
@@ -707,6 +713,10 @@ function setupEvents() {
     state.mode = 'exam';
     elements.modeCardExam.classList.add('selected');
     elements.modeCardPractice.classList.remove('selected');
+    selectCountOption('30');
+    if (elements.shuffleQuestionsCheck) {
+      elements.shuffleQuestionsCheck.checked = true;
+    }
   });
 
   // Start Test Button
