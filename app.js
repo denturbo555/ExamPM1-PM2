@@ -86,13 +86,26 @@ const elements = {
   confirmOkBtn: document.getElementById('confirmOkBtn')
 };
 
+// --- SVG Icon Templates ---
+const SVG_ICONS = {
+  check: '<svg class="svg-inline check-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 5px;"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+  cross: '<svg class="svg-inline cross-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 5px;"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',
+  warning: '<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
+  home: '<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
+  finish: '<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>',
+  time: '<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+  sun: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
+  bulbBadge: '<svg class="mode-badge-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6h8c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7z"></path></svg>',
+  timerBadge: '<svg class="mode-badge-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>'
+};
+
 // --- Custom Confirmation Modal ---
 let confirmCallback = null;
 
-function showConfirm(title, text, onConfirm, icon = '⚠️') {
+function showConfirm(title, text, onConfirm, iconType = 'warning') {
   elements.confirmTitle.textContent = title;
   elements.confirmText.textContent = text;
-  elements.confirmIcon.textContent = icon;
+  elements.confirmIcon.innerHTML = SVG_ICONS[iconType] || SVG_ICONS.warning;
   confirmCallback = onConfirm;
   elements.confirmModal.classList.add('open');
 }
@@ -135,7 +148,7 @@ function toggleTheme() {
 
 function updateThemeIcon(theme) {
   if (theme === 'dark') {
-    elements.themeToggleBtn.innerHTML = '☀️';
+    elements.themeToggleBtn.innerHTML = SVG_ICONS.sun;
   } else {
     elements.themeToggleBtn.innerHTML = '<span class="theme-icon-orb"></span>';
   }
@@ -246,11 +259,12 @@ function startQuiz(customQuestions = null) {
   // Set mode badge
   if (state.mode === 'practice') {
     elements.quizModeBadge.className = 'mode-badge mode-practice';
-    elements.quizModeBadge.textContent = '💡 Обучение';
+    elements.quizModeBadge.innerHTML = SVG_ICONS.bulbBadge + ' <span>Обучение</span>';
     elements.quizTimer.style.display = 'none';
   } else {
     elements.quizModeBadge.className = 'mode-badge mode-exam';
-    elements.quizModeBadge.textContent = state.questions.length === 30 ? '⏱️ Экзамен • Вариант (30 вопр.)' : '⏱️ Экзамен';
+    const label = state.questions.length === 30 ? 'Экзамен • Вариант (30 вопр.)' : 'Экзамен';
+    elements.quizModeBadge.innerHTML = SVG_ICONS.timerBadge + ' <span>' + label + '</span>';
     elements.quizTimer.style.display = 'inline-flex';
     initTimer();
   }
@@ -349,9 +363,9 @@ function renderCurrentQuestion() {
   // Update button texts
   elements.prevBtn.style.visibility = state.currentIndex === 0 ? 'hidden' : 'visible';
   if (state.currentIndex === total - 1) {
-    elements.nextBtn.textContent = 'Завершить 🏁';
+    elements.nextBtn.innerHTML = '<span>Завершить</span> <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-left: 5px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>';
   } else {
-    elements.nextBtn.textContent = 'Далее →';
+    elements.nextBtn.innerHTML = '<span>Далее →</span>';
   }
 
   updateNavGridActive();
@@ -501,7 +515,12 @@ function finishQuiz() {
   // Toggle Retry Errors Button
   if (errors.length > 0) {
     elements.retryErrorsBtn.style.display = 'inline-flex';
-    elements.retryErrorsBtn.textContent = `⚠️ Повторить ошибки (${errors.length})`;
+    const retryLabel = document.getElementById('retryErrorsLabel');
+    if (retryLabel) {
+      retryLabel.textContent = `Повторить ошибки (${errors.length})`;
+    } else {
+      elements.retryErrorsBtn.innerHTML = `<svg class="btn-action-svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> <span>Повторить ошибки (${errors.length})</span>`;
+    }
   } else {
     elements.retryErrorsBtn.style.display = 'none';
   }
@@ -543,20 +562,20 @@ function renderReviewList(filter) {
     if (isSkipped) {
       const skipNotice = document.createElement('div');
       skipNotice.className = 'review-answer user-wrong';
-      skipNotice.textContent = '❌ Ответ не был дан';
+      skipNotice.innerHTML = SVG_ICONS.cross + ' <span>Ответ не был дан</span>';
       item.appendChild(skipNotice);
     } else if (!isCorrect) {
       const userAns = document.createElement('div');
       userAns.className = 'review-answer user-wrong';
       const userLetter = letters[q.userAnswer] || '';
-      userAns.textContent = `❌ Ваш ответ: ${userLetter}) ${q.options[q.userAnswer]}`;
+      userAns.innerHTML = SVG_ICONS.cross + ` <span>Ваш ответ: <strong>${userLetter})</strong> ${q.options[q.userAnswer]}</span>`;
       item.appendChild(userAns);
     }
 
     const correctAns = document.createElement('div');
     correctAns.className = 'review-answer correct-ans';
     const corrLetter = letters[q.correct] || '';
-    correctAns.textContent = `✔ Правильный ответ: ${corrLetter}) ${q.options[q.correct]}`;
+    correctAns.innerHTML = SVG_ICONS.check + ` <span>Правильный ответ: <strong>${corrLetter})</strong> ${q.options[q.correct]}</span>`;
     item.appendChild(correctAns);
 
     elements.reviewContainer.appendChild(item);
@@ -625,7 +644,7 @@ function renderSearchResults(query) {
     const ansText = document.createElement('div');
     ansText.className = 'search-item-ans';
     const corrLetter = letters[item.correct] || '';
-    ansText.textContent = `✔ ${corrLetter}) ${item.options[item.correct]}`;
+    ansText.innerHTML = SVG_ICONS.check + ` <span>${corrLetter}) ${item.options[item.correct]}</span>`;
     card.appendChild(ansText);
 
     elements.searchResultsList.appendChild(card);
@@ -693,7 +712,7 @@ function setupEvents() {
       showConfirm('Прервать тестирование?', 'Текущий прогресс будет сброшен. Вернуться на главную страницу?', () => {
         clearInterval(state.timerInterval);
         showScreen(elements.startScreen);
-      }, '🏠');
+      }, 'home');
     } else {
       showScreen(elements.startScreen);
     }
@@ -740,7 +759,7 @@ function setupEvents() {
       if (unans > 0) {
         showConfirm('Остались вопросы', `У вас осталось неотвеченных вопросов: ${unans}. Всё равно завершить тест и посмотреть результаты?`, () => {
           finishQuiz();
-        }, '⏳');
+        }, 'time');
       } else {
         finishQuiz();
       }
@@ -751,7 +770,7 @@ function setupEvents() {
   elements.exitQuizBtn.addEventListener('click', () => {
     showConfirm('Завершить тест?', 'Вы уверены, что хотите завершить тестирование и перейти к результатам?', () => {
       finishQuiz();
-    }, '🏁');
+    }, 'finish');
   });
 
   // Confirmation Modal Events

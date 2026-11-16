@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22 fill=%22none%22 stroke=%22%2310b981%22 stroke-width=%222.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect x=%222%22 y=%224%22 width=%2228%22 height=%2218%22 rx=%223%22 fill=%22%23047857%22/><line x1=%228%22 y1=%2228%22 x2=%2224%22 y2=%2228%22/><line x1=%2216%22 y1=%2222%22 x2=%2216%22 y2=%2228%22/></svg>">
 </head>
 <body>
 
@@ -50,16 +50,30 @@
         <!-- Subject Selection Tabs -->
         <div class="subject-toggle-row">
           <button class="subject-tab-btn active" data-subject="pm1" id="subjectBtnPm1" type="button">
-            💻 Модуль ПМ1
+            <svg class="tab-svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Модуль ПМ1</span>
           </button>
           <button class="subject-tab-btn" data-subject="pm2" id="subjectBtnPm2" type="button">
-            🎨 Модуль ПМ2
+            <svg class="tab-svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.437 6.12 17.203 2 12 2z"></path>
+            </svg>
+            <span>Модуль ПМ2</span>
           </button>
         </div>
 
         <!-- Top Badge -->
         <div class="badge-pill">
-          <span class="badge-sparkle">★</span>
+          <svg class="badge-sparkle-svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <path d="M12 2l2.4 7.2h7.6l-6.1 4.5 2.3 7.3-6.2-4.6-6.2 4.6 2.3-7.3-6.1-4.5h7.6z"></path>
+          </svg>
           <span id="badgeText">161 уникальный вопрос • Без повторений</span>
         </div>
 
@@ -96,7 +110,7 @@
               </svg>
             </div>
             <div class="mode-card-body">
-              <h3 class="mode-card-title">Режим «Экзамен» <span class="timer-emoji">⏱️</span></h3>
+              <h3 class="mode-card-title">Режим «Экзамен»</h3>
               <p class="mode-card-desc">
                 Реальное тестирование с таймером на 30 вопросов (экзаменационный вариант). Ответы не показываются до окончания теста. Оценка по 5-балльной шкале в конце.
               </p>
@@ -123,19 +137,19 @@
                 <div class="custom-dropdown-menu" id="countDropdownMenu">
                   <div class="dropdown-item active" data-value="all" id="optAll">
                     <span class="item-text" id="optAllText">Все вопросы (161)</span>
-                    <span class="item-check">✔</span>
+                    <span class="item-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   </div>
                   <div class="dropdown-item" data-value="30">
                     <span class="item-text">30 вопросов (Вариант экзамена)</span>
-                    <span class="item-check">✔</span>
+                    <span class="item-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   </div>
                   <div class="dropdown-item" data-value="50">
                     <span class="item-text">50 случайных вопросов</span>
-                    <span class="item-check">✔</span>
+                    <span class="item-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   </div>
                   <div class="dropdown-item" data-value="100">
                     <span class="item-text">100 случайных вопросов</span>
-                    <span class="item-check">✔</span>
+                    <span class="item-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   </div>
                 </div>
                 <input type="hidden" id="questionCountSelect" value="all">
@@ -186,11 +200,20 @@
         <!-- Quiz Header -->
         <div class="quiz-header">
           <div class="quiz-meta">
-            <span id="quizModeBadge" class="mode-badge mode-practice">💡 Обучение</span>
+            <span id="quizModeBadge" class="mode-badge mode-practice">
+              <svg class="mode-badge-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path><path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6h8c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7z"></path>
+              </svg>
+              <span>Обучение</span>
+            </span>
             <span id="questionCounter" class="question-counter-badge">Вопрос 1 из 161</span>
           </div>
           <div id="quizTimer" class="timer" style="display: none;">
-            <span>⏱️</span>
+            <svg class="timer-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
             <span class="timer-digits">45:00</span>
           </div>
         </div>
@@ -275,13 +298,27 @@
         <!-- Results Action Buttons -->
         <div class="results-actions-bar">
           <button class="btn-primary-gradient" id="retryAllBtn">
-            <span>🔄 Пройти заново</span>
+            <svg class="btn-action-svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            <span>Пройти заново</span>
           </button>
           <button class="btn-secondary-outline" id="retryErrorsBtn" style="display: none;">
-            <span>⚠️ Повторить ошибки</span>
+            <svg class="btn-action-svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span id="retryErrorsLabel">Повторить ошибки</span>
           </button>
           <button class="btn-secondary-outline" id="resultsHomeBtn">
-            <span>🏠 На главную</span>
+            <svg class="btn-action-svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>На главную</span>
           </button>
         </div>
 
@@ -309,10 +346,20 @@
     <div class="modal-window">
       <div class="modal-top">
         <div class="modal-title-wrap">
-          <span class="modal-icon">🔍</span>
+          <span class="modal-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
           <h3>Шпаргалка и поиск по базе вопросов</h3>
         </div>
-        <button class="btn-close-modal" id="closeSearchBtn">✕</button>
+        <button class="btn-close-modal" id="closeSearchBtn" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
       <div class="modal-search-box">
         <input type="text" id="searchInput" class="modal-search-input" placeholder="Введите ключевое слово (например: BIOS, sfc, память, 80 Plus, SATA)...">
@@ -329,7 +376,13 @@
   <div class="modal-backdrop" id="confirmModal">
     <div class="modal-window confirm-modal-window">
       <div class="confirm-modal-body">
-        <div class="confirm-modal-icon" id="confirmIcon">⚠️</div>
+        <div class="confirm-modal-icon" id="confirmIcon">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
         <h4 class="confirm-modal-title" id="confirmTitle">Подтвердите действие</h4>
         <p class="confirm-modal-text" id="confirmText">Вы уверены?</p>
         <div class="confirm-modal-actions">

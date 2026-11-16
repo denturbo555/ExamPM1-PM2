@@ -122,7 +122,13 @@ body { font-family: var(--font-family); background: var(--bg-gradient); color: v
 
 .quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem; }
 .quiz-meta { display: flex; align-items: center; gap: 0.5rem; }
-.mode-badge { padding: 0.25rem 0.6rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+.mode-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.6rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+.mode-badge-svg { flex-shrink: 0; }
+.timer-svg-icon { flex-shrink: 0; }
+.tab-svg-icon { flex-shrink: 0; }
+.badge-sparkle-svg { flex-shrink: 0; color: #f59e0b; }
+.btn-action-svg { flex-shrink: 0; }
+.confirm-modal-icon { display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
 .mode-practice { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
 .mode-exam { background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
 .question-counter-badge { font-weight: 600; font-size: 0.85rem; color: var(--text-muted); }
